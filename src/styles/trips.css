@@ -1,0 +1,93 @@
+/* استایل‌های وضعیت ثبت شده */
+.status-view {
+  margin-bottom: 20px;
+}
+
+.status-card {
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 2px solid;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.no-trip-status {
+  border-color: #55adbe;
+  background: linear-gradient(135deg, #f8fdff, #e3f7fb);
+}
+
+.not-in-city-status {
+  border-color: #764ba2;
+  background: linear-gradient(135deg, #f9f7ff, #f0ebff);
+}
+
+.status-card .status-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.status-card .status-content h3 {
+  color: #2c3e50;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.status-card .status-content p {
+  color: #6c757d;
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.status-note {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 12px 15px;
+  display: inline-block;
+}
+
+.status-note span {
+  color: #856404;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ریسپانسیو برای وضعیت‌ها */
+@media (max-width: 768px) {
+  .status-card {
+    padding: 30px 25px;
+    margin: 0 10px;
+  }
+  
+  .status-card .status-icon {
+    font-size: 48px;
+  }
+  
+  .status-card .status-content h3 {
+    font-size: 18px;
+  }
+  
+  .status-card .status-content p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-card {
+    padding: 25px 20px;
+  }
+  
+  .status-card .status-icon {
+    font-size: 36px;
+  }
+  
+  .status-card .status-content h3 {
+    font-size: 16px;
+  }
+}

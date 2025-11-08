@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import '~@iconscout/unicons/css/line.css';
+@import '~@mdi/font/css/materialdesignicons.min.css';
+/* اضافه کردن فونت فارسی */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+
+
+body {
+  margin: 0;
+  font-family: "Vazirmatn", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Vazirmatn", source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

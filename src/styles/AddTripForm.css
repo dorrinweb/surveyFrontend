@@ -1,0 +1,18 @@
+.add-trip-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  background-color: #f9f9f9;
+  padding-top: 50px;
+}
+
+.add-trip-form {
+  width: 80%;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.add-trip-form h2 {
+  margin-bottom: 20px;
+}

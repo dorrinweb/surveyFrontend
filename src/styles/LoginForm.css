@@ -1,0 +1,240 @@
+/* استایل‌های مخصوص صفحه لاگین */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-content-box {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.welcome-message {
+  background: linear-gradient(135deg, #55adbe, #529bad);
+  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 25px rgba(85, 173, 190, 0.3);
+}
+
+.welcome-message h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.welcome-message p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.login-content-box h2 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+}
+
+.login-content-box h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+.login-content-box form {
+  text-align: right;
+}
+
+.login-content-box label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #495057;
+  font-size: 14px;
+  text-align: right;
+}
+
+.login-content-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  text-align: right;
+  direction: ltr;
+}
+
+.login-content-box input:focus {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  outline: none;
+}
+
+.login-content-box input:disabled {
+  background: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* دکمه اصلی */
+.login-content-box button[type="submit"] {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+  margin-top: 10px;
+}
+
+.login-content-box button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.login-content-box button[type="submit"]:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* دکمه ارسال مجدد */
+.resend-code-button {
+  background: transparent;
+  color: #667eea;
+  border: 2px solid #667eea;
+  padding: 12px 25px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.resend-code-button:hover:not(:disabled) {
+  background: #667eea;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.resend-code-button:disabled {
+  border-color: #6c757d;
+  color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* پیام‌ها */
+.login-content-box .error {
+  background: #ffebee;
+  color: #d32f2f;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ffcdd2;
+  font-size: 13px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.login-content-box .success {
+  background: #e8f5e8;
+  color: #2e7d32;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #c8e6c9;
+  font-size: 13px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 15px;
+  }
+  
+  .login-content-box {
+    padding: 30px 25px;
+    width: 95%;
+    border-radius: 15px;
+  }
+  
+  .welcome-message {
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+  
+  .welcome-message h3 {
+    font-size: 18px;
+  }
+  
+  .welcome-message p {
+    font-size: 13px;
+  }
+  
+  .login-content-box h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-content-box {
+    padding: 25px 20px;
+  }
+  
+  .welcome-message {
+    padding: 15px;
+  }
+  
+  .login-content-box h2 {
+    font-size: 20px;
+  }
+  
+  .login-content-box input {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .login-content-box button[type="submit"] {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .resend-code-button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}

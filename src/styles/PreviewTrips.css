@@ -1,0 +1,20 @@
+.preview-trips-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.preview-trips-wrapper {
+  max-width: 600px;
+  width: 100%;
+}
+
+.preview-trips-wrapper h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}

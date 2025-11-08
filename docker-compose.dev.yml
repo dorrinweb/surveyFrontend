@@ -1,0 +1,21 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend-app
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      # 👇 درخواست‌های اصلی سایت (بدون پورت اضافی)
+      - "traefik.http.routers.frontend.rule=Host(`77.237.66.83`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
+
+networks:
+  traefik:
+    external: true

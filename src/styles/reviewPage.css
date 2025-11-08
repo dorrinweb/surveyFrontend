@@ -1,0 +1,273 @@
+/* استایل‌های مخصوص صفحه بررسی نهایی */
+.review-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .review-page h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
+  
+  .review-page h3 {
+    color: #444;
+    margin-bottom: 20px;
+    font-size: 22px;
+    border-bottom: 2px solid #55adbe;
+    padding-bottom: 8px;
+  }
+  
+  /* اطلاعات کلی خانوار */
+  .review-page .info-box {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+  }
+  
+  .review-page .info-box h3 {
+    color: #55adbe;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .review-page .info-box p {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .review-page .info-box strong {
+    color: #555;
+    min-width: 200px;
+    display: inline-block;
+  }
+  
+  /* بخش اعضای خانوار */
+  .individuals-review {
+    margin-top: 30px;
+  }
+  
+  .individuals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+  }
+  
+  .individual-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 38px 50px;
+
+
+  }
+  
+  .individual-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #55adbe;
+  }
+  
+  .card-header {
+    background: linear-gradient(135deg, #55adbe, #529bad);
+    color: white;
+    padding: 11px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+  }
+  
+  .card-header h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .card-body {
+    padding: 25px;
+  }
+  
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+  }
+  
+  .info-row:hover {
+    background-color: #fafafa;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin: -5px -10px 10px -10px;
+  }
+  
+  .info-row:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  
+  .info-label {
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+  
+  .info-value {
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+    flex: 1;
+    padding-right: 10px;
+  }
+  
+  /* بخش اطلاعات خودرو */
+  .car-details {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px 0;
+    border-right: 4px solid #55adbe;
+    position: relative;
+  }
+  
+  .car-details::before {
+    content: "🚗";
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .car-details .info-row {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .car-details .info-row:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  
+  /* دکمه ثبت نهایی */
+  .review-page .submit-button {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    border: none !important;
+    padding: 12px 30px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+  }
+  
+  .review-page .submit-button:hover {
+    background: linear-gradient(135deg, #218838, #1e9e8a) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3) !important;
+  }
+  
+  .review-page .submit-button:disabled {
+    background: #6c757d !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* ریسپانسیو برای تبلت */
+  @media (max-width: 1024px) {
+    .individuals-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .review-page {
+      padding: 15px;
+    }
+  }
+  
+  /* ریسپانسیو برای موبایل */
+  @media (max-width: 768px) {
+    .individuals-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .individual-card {
+      margin-bottom: 0;
+    }
+    
+    .info-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    
+    .info-label {
+      min-width: auto;
+      font-size: 13px;
+    }
+    
+    .info-value {
+      text-align: right;
+      width: 100%;
+      padding-right: 0;
+      font-size: 13px;
+    }
+    
+    .card-body {
+      padding: 20px 15px;
+    }
+    
+    .review-page h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .review-page h3 {
+      font-size: 20px;
+    }
+  }
+  
+  /* ریسپانسیو برای موبایل‌های کوچک */
+  @media (max-width: 480px) {
+    .review-page {
+      padding: 10px;
+    }
+    
+    .individuals-grid {
+      gap: 15px;
+    }
+    
+    .card-body {
+      padding: 15px 12px;
+    }
+    
+    .info-row {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+    }
+    
+    .car-details {
+      padding: 15px;
+      margin: 10px 0;
+    }
+  }

@@ -1,0 +1,12 @@
+.landing {
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+  }
+  
+  /* فقط در محدوده‌ی .landing اعمال شود */
+  .landing * {
+    font-family: 'Vazirmatn', sans-serif;
+    direction: rtl;
+  }
+  

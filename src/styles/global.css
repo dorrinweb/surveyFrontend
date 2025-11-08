@@ -1,0 +1,426 @@
+/* فونت فارسی شابنام */
+@font-face {
+  font-family: 'Shabnam';
+  src: url('../assets/fonts/Shabnam-Medium.woff2') format('woff2'),
+       url('../assets/fonts/Shabnam-Medium.woff') format('woff'),
+       url('../assets/fonts/Shabnam-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Shabnam-Bold';
+  src: url('../assets/fonts/Shabnam-Bold.woff2') format('woff2'),
+       url('../assets/fonts/Shabnam-Bold.woff') format('woff'),
+       url('../assets/fonts/Shabnam-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* تنظیمات کلی صفحات */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Shabnam', Arial, sans-serif !important;
+  background-color: #f4f4f4;
+  color: #333;
+  direction: rtl;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea {
+  font-family: 'Shabnam', Arial, sans-serif !important;
+}
+
+/* ------------------ فرم‌ها ------------------ */
+.form-container {
+  max-width: 500px !important;
+  margin: 50px auto !important;
+  padding: 30px !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 10px !important;
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
+  text-align: right;
+}
+
+input, select, textarea {
+  width: 100% !important;
+  padding: 10px !important;
+  font-size: 16px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 5px !important;
+  box-sizing: border-box !important;
+  background-color: #f9f9f9 !important;
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #007bff !important;
+  outline: none !important;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5) !important;
+}
+
+/* ------------------ دکمه‌ها ------------------ */
+/* استایل اصلی برای تمام دکمه‌ها (به جز مدال) */
+button:not(.modal-button) {
+  padding: 12px 20px;
+  background-color: #55adbe;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+button:not(.modal-button):hover {
+  background-color: #529bad;
+}
+
+button:not(.modal-button):disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* استایل‌های خاص برای دکمه‌های مختلف */
+.add-trip-button,
+.edit-trip-button,
+.add-next-trip-button,
+.submit-trips-button {
+  /* تمام استایل‌ها از button اصلی به ارث می‌برند */
+  /* در صورت نیاز می‌توان استایل‌های خاص اضافه کرد */
+}
+
+/* ------------------ آیکن لوکیشن ------------------ */
+.location-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #55adbe;
+  margin-left: 10px;
+  padding: 8px;
+}
+
+/* ------------------ پیام‌های خطا و موفقیت ------------------ */
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.success {
+  color: green;
+  font-size: 13px;
+  text-align: right;
+}
+
+.message-box {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.message-box.success {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.message-box.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+/* ------------------ فیلدهای ساعت ------------------ */
+.time-fields {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.time-fields input,
+.time-fields select {
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  flex: 1;
+  min-width: 80px;
+  max-width: 150px;
+  box-sizing: border-box;
+}
+
+.time-fields select {
+  text-align: right;
+}
+
+/* ------------------ موقعیت مکانی ------------------ */
+.location-field {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.location-field input {
+  padding: 10px 40px 10px 10px !important;
+  text-align: center;
+}
+
+.location-icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 34px;
+  color: #55adbe;
+  margin-left: 10px;
+  padding: 8px;
+}
+/* ------------------ آیتم‌های سفر ------------------ */
+.trip-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.trip-item:hover {
+  background-color: #e7f3ff;
+}
+
+/* ------------------ باکس اطلاعات ------------------ */
+.info-box {
+  padding: 20px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ------------------ آکاردئون ------------------ */
+.accordion-header {
+  padding: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.accordion-header:hover {
+  background-color: #e6e6e6;
+}
+
+.accordion-body {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #333;
+}
+
+.toggle-button:hover {
+  color: #4f5458;
+}
+
+/* ------------------ مدال ------------------ */
+.confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirm-modal .modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin-top: 0 !important; /* حذف margin-top برای دکمه‌های مدال */
+}
+
+.modal-button.confirm {
+  background-color: #55adbe;
+  color: #fff;
+}
+
+.modal-button.confirm:hover {
+  background-color: #0056b3;
+}
+
+.modal-button.cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+.modal-button.cancel:hover {
+  background-color: #999;
+}
+
+/* ------------------ کانتینر دکمه‌ها ------------------ */
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* ------------------ ریسپانسیو ------------------ */
+/* ------------------ ریسپانسیو ------------------ */
+@media (max-width: 1024px) {
+  .form-container {
+    max-width: 450px;
+    padding: 25px;
+  }
+
+  input, select, textarea, button {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 882px) {
+  .form-container {
+    max-width: 90%;
+    padding: 20px;
+  }
+  
+  .location-field {
+    margin-bottom: 12px;
+  }
+  
+  .location-icon {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    padding: 15px;
+  }
+
+  input, select, textarea, button {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .time-fields input, .time-fields select {
+    font-size: 12px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  .buttons-container,
+  .modal-actions,
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 10px;
+  }
+
+  input, select, textarea, button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .time-fields input, .time-fields select {
+    font-size: 12px;
+    padding: 6px;
+    width: 100%;
+  }
+  
+  .location-icon {
+    font-size: 24px;
+    right: 5px;
+  }
+}
+
+/* اضافه کردن breakpoint برای سایزهای بسیار کوچک */
+@media (max-width: 344px) {
+  .form-container {
+    padding: 5px;
+    margin: 20px auto;
+  }
+  
+  input, select, textarea, button {
+    font-size: 13px;
+    padding: 6px;
+  }
+  
+  .location-field input {
+    padding: 8px 35px 8px 8px !important;
+  }
+  
+  .location-icon {
+    font-size: 20px;
+    right: 3px;
+    padding: 4px;
+  }
+}
