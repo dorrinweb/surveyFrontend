@@ -44,10 +44,7 @@ const HouseholdDetailsPage = () => {
   };
 
   const checkIndividualStatus = (individual) => {
-    if (individual.noTrip === true || individual.noInCity === true) {
-      return "completed";
-    }
-    if (individual.trips && individual.trips.length > 0) {
+    if (individual.noTrip === true || individual.noInCity === true || individual.hasTrip === true) {
       return "completed";
     }
     return "pending";
