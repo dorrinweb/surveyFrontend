@@ -13,28 +13,36 @@ const HouseholdDetailsPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    let isMounted = true;
+  
     const getHouseholdDetails = async () => {
       try {
         const response = await fetchHouseholdDetails();
         const data = response.data.household;
-
+  
+        if (!isMounted) return;
+  
         if (!data || !data.individuals || data.individuals.length === 0) {
           navigate("/household/register", { replace: true });
           return;
         }
-
+  
         setHousehold(data);
       } catch (err) {
-        console.error("خطا در دریافت اطلاعات خانوار:", err);
-        setError("خطایی رخ داد. لطفاً دوباره تلاش کنید.");
+        if (isMounted) {
+          console.error("خطا در دریافت اطلاعات خانوار:", err);
+          setError("خطایی رخ داد. لطفاً دوباره تلاش کنید.");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
-
+  
     getHouseholdDetails();
+  
+    return () => { isMounted = false; };
   }, [navigate]);
-
+  
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
