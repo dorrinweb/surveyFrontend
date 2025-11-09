@@ -115,42 +115,60 @@ const handleHouseholdChange = (e) => {
   // مقدار تبدیل شده را در فیلد نمایش می‌دهیم
   setHouseholdData({ ...householdData, [name]: convertedValue });
 };
+const handleIndividualChange = (e) => {
+  const { name, value } = e.target;
 
-  const handleIndividualChange = (e) => {
-    const { name, value } = e.target;
-  
-    const updatedIndividuals = [...individuals];
-  
-    if (name === "hour" || name === "minute" || name === "period") {
-      // فقط برای ساعت و دقیقه تبدیل عدد انجام شود
-      if (name === "hour" || name === "minute") {
-        const convertedValue = convertToEnglishNumbers(value);
-        
-        updatedIndividuals[currentMemberIndex].workStartHour = {
-          ...updatedIndividuals[currentMemberIndex].workStartHour,
-          [name]: convertedValue,
-        };
-      } else {
-        // برای period فقط مقدار را ذخیره کن
-        updatedIndividuals[currentMemberIndex].workStartHour = {
-          ...updatedIndividuals[currentMemberIndex].workStartHour,
-          [name]: value,
-        };
-      }
+  const updatedIndividuals = [...individuals];
+
+  if (name === "hour" || name === "minute" || name === "period") {
+    // فقط برای ساعت و دقیقه تبدیل عدد انجام شود
+    if (name === "hour" || name === "minute") {
+      const convertedValue = convertToEnglishNumbers(value);
       
-      setWorkStartHourError(""); // پاک کردن هرگونه خطا
+      updatedIndividuals[currentMemberIndex].workStartHour = {
+        ...updatedIndividuals[currentMemberIndex].workStartHour,
+        [name]: convertedValue,
+      };
     } else {
-      // برای سایر فیلدها
-      updatedIndividuals[currentMemberIndex] = {
-        ...updatedIndividuals[currentMemberIndex],
+      // برای period فقط مقدار را ذخیره کن
+      updatedIndividuals[currentMemberIndex].workStartHour = {
+        ...updatedIndividuals[currentMemberIndex].workStartHour,
         [name]: value,
       };
     }
+    
+    setWorkStartHourError(""); // پاک کردن هرگونه خطا
+  } else {
+    // برای سایر فیلدها
+    updatedIndividuals[currentMemberIndex] = {
+      ...updatedIndividuals[currentMemberIndex],
+      [name]: value,
+    };
+  }
+
+  setIndividuals(updatedIndividuals);
+};
+
+
+
+// تابع جدید برای جلوگیری از ورود حروف
+const handleKeyPress = (e) => {
+  const key = e.key;
   
-    setIndividuals(updatedIndividuals);
+  // لیست کاراکترهای مجاز
+  const allowedKeys = [
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', // اعداد انگلیسی
+    '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', // اعداد فارسی
+    'Backspace', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Delete'
+  ];
   
-    // بقیه کد...
-  };
+  // اگر کلید فشار داده شده در لیست مجازها نیست، جلوگیری کن
+  if (!allowedKeys.includes(key)) {
+    e.preventDefault();
+    return false;
+  }
+  return true;
+};
 
   const isStep1Valid = () => {
     return (
@@ -398,38 +416,40 @@ const handleHouseholdChange = (e) => {
             <option value="سایر">سایر</option>
           </select>
 
-  <div>
-    <label>ساعت شروع کار:</label>
-    <div className="time-fields">
-      <input
-        type="text"
-        name="hour"
-        placeholder="ساعت"
-        value={individuals[currentMemberIndex]?.workStartHour?.hour || ""}
-        onChange={handleIndividualChange}
-        maxLength="2"
-      />
-      <span>:</span>
-      <input
-        type="text"
-        name="minute"
-        placeholder="دقیقه"
-        value={individuals[currentMemberIndex]?.workStartHour?.minute || ""}
-        onChange={handleIndividualChange}
-        maxLength="2"
-      />
-      <select
-        name="period"
-        value={individuals[currentMemberIndex]?.workStartHour?.period || ""}
-        onChange={handleIndividualChange}
-      >
-        <option value="">زمان</option>
-        <option value="صبح">صبح</option>
-        <option value="عصر">عصر</option>
-      </select>
-    </div>
-    {workStartHourError && <p className="error">{workStartHourError}</p>}
+          <div>
+  <label>ساعت شروع کار:</label>
+  <div className="time-fields">
+    <input
+      type="text"
+      name="hour"
+      placeholder="ساعت"
+      value={individuals[currentMemberIndex]?.workStartHour?.hour || ""}
+      onChange={handleIndividualChange}
+      onKeyPress={handleKeyPress} // اضافه کردن این خط
+      maxLength="2"
+    />
+    <span>:</span>
+    <input
+      type="text"
+      name="minute"
+      placeholder="دقیقه"
+      value={individuals[currentMemberIndex]?.workStartHour?.minute || ""}
+      onChange={handleIndividualChange}
+      onKeyPress={handleKeyPress} // اضافه کردن این خط
+      maxLength="2"
+    />
+    <select
+      name="period"
+      value={individuals[currentMemberIndex]?.workStartHour?.period || ""}
+      onChange={handleIndividualChange}
+    >
+      <option value="">زمان</option>
+      <option value="صبح">صبح</option>
+      <option value="عصر">عصر</option>
+    </select>
   </div>
+  {workStartHourError && <p className="error">{workStartHourError}</p>}
+</div>
 
           <label>گواهی‌نامه: <span style={{ color: "red" }}>*</span></label>
           <select
