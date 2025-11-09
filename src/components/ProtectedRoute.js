@@ -1,16 +1,16 @@
-import { Navigate } from 'react-router-dom';
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
-// این کامپوننت بررسی می‌کنه که کاربر لاگین کرده یا نه
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("accessToken");
+  const location = useLocation();
 
   if (!token) {
-    // اگر توکن موجود نبود، ریدایرکت به صفحه لاگین
-    return <Navigate to="/" replace />;
+    // ذخیره مسیر فعلی برای ریدایرکت بعد از لاگین (اختیاری)
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // اگر توکن موجود بود، اجازه دسترسی به صفحه داده می‌شود
-  return children;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

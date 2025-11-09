@@ -17,35 +17,32 @@ const TripsPage = () => {
   const [userStatus, setUserStatus] = useState(null);
   console.log(setUserStatus)
   const navigate = useNavigate();
-
+  
   useEffect(() => {
+    let isMounted = true;
+  
     const getTrips = async () => {
       try {
         const response = await fetchUserTrips(memberId);
-        console.log("داده‌های دریافتی:", response.data);
-        
         const userData = response.data;
-        
-        // بررسی وضعیت کاربر
-        if (userData.noTrip === true) {
-          setUserStatus('noTrip');
-        } else if (userData.noInCity === true) {
-          setUserStatus('notInCity');
-        } else {
-          // اگر وضعیتی ثبت نکرده، سفرها را نمایش بده
-          setTrips(userData.trips || []);
-        }
-        
+  
+        if (!isMounted) return;
+  
+        if (userData.noTrip === true) setUserStatus('noTrip');
+        else if (userData.noInCity === true) setUserStatus('notInCity');
+        else setTrips(userData.trips || []);
       } catch (err) {
-        console.error("خطا در دریافت اطلاعات:", err);
-        setError("خطایی رخ داد. لطفاً دوباره تلاش کنید.");
+        if (isMounted) setError("خطایی رخ داد. لطفاً دوباره تلاش کنید.");
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
-
+  
     getTrips();
+  
+    return () => { isMounted = false; };
   }, [memberId]);
+  
 
   const handleAddTrip = () => {
     navigate(`/trips/${memberId}/add`);

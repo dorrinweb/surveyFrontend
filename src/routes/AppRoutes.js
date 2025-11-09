@@ -8,6 +8,8 @@ import TripsPage from "../components/TripsPage";
 import AddTripForm from "../components/AddTripForm";
 import PreViewTripsPage from "../components/PreViewTripsPage";
 import ProtectedRoute from '../components/ProtectedRoute';
+import AdminDashboard from "../components/AdminDashboard";
+
 
 const AppRoutes = () => {
   return (
@@ -67,6 +69,15 @@ const AppRoutes = () => {
             </ProtectedRoute>
           } 
         />
+        <Route 
+  path="/admin/dashboard" 
+  element={
+    <ProtectedRoute>
+      <AdminDashboard />
+    </ProtectedRoute>
+  } 
+/>
+
 
         {/* مسیر نادیده */}
         <Route path="*" element={<NotFound />} />
