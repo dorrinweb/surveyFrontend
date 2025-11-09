@@ -1,12 +1,21 @@
-.landing {
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* فقط در محدوده‌ی .landing اعمال شود */
+.landing-page * {
+  font-family: 'Vazirmatn', sans-serif;
+  direction: rtl;
+}
+
+/* استایل‌های اضافی برای ریسپانسیو */
+@media (max-width: 640px) {
+  .landing-page h1 {
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
   
-  /* فقط در محدوده‌ی .landing اعمال شود */
-  .landing * {
-    font-family: 'Vazirmatn', sans-serif;
-    direction: rtl;
+  .landing-page .relative.z-10 {
+    padding: 0 1rem;
   }
-  
+}
