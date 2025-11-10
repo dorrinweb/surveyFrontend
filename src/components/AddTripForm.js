@@ -55,7 +55,16 @@ const AddTripForm = () => {
   });
   const [activeField, setActiveField] = useState("");
   const [errors, setErrors] = useState({});
-
+  
+// این useEffect را بعد از stateها اضافه کنید
+React.useEffect(() => {
+  // هر بار که currentTrip تغییر کرد، آن را در آرایه trips ذخیره کن
+  if (currentTripIndex >= 0 && currentTripIndex < trips.length) {
+    const updatedTrips = [...trips];
+    updatedTrips[currentTripIndex] = currentTrip;
+    setTrips(updatedTrips);
+  }
+}, [currentTrip]); // فقط وقتی currentTrip تغییر کرد اجرا شود
   // تبدیل اعداد فارسی به انگلیسی
   const convertToEnglishNumbers = (str) => {
     if (!str) return "";
@@ -250,19 +259,21 @@ if (trip.tripFee.trim() !== "" && parseFloat(trip.tripFee) < 0) {
     }
   
     setErrors({});
-    const updatedTrips = [...trips];
-  
-    // اگر هدف سفر "سایر" باشد، مقدار customPurpose را جایگزین purpose کنیم
+    
+    // 🔴 مشکل: اینجا currentTrip آپدیت می‌شود اما در trips ذخیره نمی‌شود
     const updatedCurrentTrip = {
       ...currentTrip,
       purpose: currentTrip.purpose === "سایر" ? currentTrip.customPurpose : currentTrip.purpose,
     };
   
-    updatedTrips[currentTripIndex] = updatedCurrentTrip;
+    // ✅ اصلاح: آپدیت آرایه trips با مقدار currentTrip
+    const updatedTrips = [...trips];
+    updatedTrips[currentTripIndex] = updatedCurrentTrip; // این خط اضافه شد
+    
+    setTrips(updatedTrips); // ذخیره تغییرات در state اصلی
   
     const nextTripIndex = currentTripIndex + 1;
     if (nextTripIndex < updatedTrips.length) {
-      setTrips(updatedTrips);
       setCurrentTrip(updatedTrips[nextTripIndex]);
       setCurrentTripIndex(nextTripIndex);
     } else {
@@ -276,7 +287,7 @@ if (trip.tripFee.trim() !== "" && parseFloat(trip.tripFee) < 0) {
         destination: { time: { hour: "", minute: "", period: "" }, location: "" },
         purpose: "",
         customPurpose: "",
-        transportationMode: "",
+        transportationMode: "", // این فیلد خالی می‌ماند
         parking: "",
         parkingFee: "",
         tripFee: "",
@@ -355,13 +366,15 @@ if (trip.tripFee.trim() !== "" && parseFloat(trip.tripFee) < 0) {
     return null;
   };
   const handleViewTrips = () => {
+    // ✅ اول currentTrip را در آرایه ذخیره کنید
     const updatedTrips = [...trips];
     const currentTripWithPurpose = {
       ...currentTrip,
       purpose: currentTrip.purpose === "سایر" ? currentTrip.customPurpose : currentTrip.purpose,
     };
-  
-    updatedTrips[currentTripIndex] = currentTripWithPurpose;
+    
+    updatedTrips[currentTripIndex] = currentTripWithPurpose; // ذخیره تغییرات
+    setTrips(updatedTrips); // آپدیت state اصلی
   
     const firstTrip = updatedTrips[0];
     const firstTripErrors = validateCurrentTrip(firstTrip);
@@ -376,7 +389,7 @@ if (trip.tripFee.trim() !== "" && parseFloat(trip.tripFee) < 0) {
         trip.departure.location?.trim() ||
         trip.destination.location?.trim() ||
         trip.purpose?.trim() ||
-        trip.transportationMode?.trim() ||
+        trip.transportationMode?.trim() || // اینجا transportationMode چک می‌شود
         trip.tripFee?.trim() ||
         (trip.parking && trip.parkingFee?.trim())
       );
@@ -392,7 +405,6 @@ if (trip.tripFee.trim() !== "" && parseFloat(trip.tripFee) < 0) {
   
     navigate("/previewtrips", { state: { trips: nonEmptyTrips, memberId } });
   };
-  
   
   
 
