@@ -1,36 +1,36 @@
 /* استایل‌های مخصوص صفحه جزئیات خانوار */
 .household-details {
   max-width: 900px;
-  margin: 30px auto;
-  padding: 0 20px;
+  margin: 20px auto;
+  padding: 0 15px;
 }
 
 .household-details h2 {
   text-align: center;
   color: #2c3e50;
-  margin-bottom: 30px;
-  font-size: 28px;
+  margin-bottom: 25px;
+  font-size: 24px;
   font-weight: bold;
   border-bottom: 3px solid #55adbe;
-  padding-bottom: 15px;
+  padding-bottom: 12px;
 }
 
 .household-details h3 {
   color: #2c3e50;
-  margin-bottom: 20px;
-  font-size: 22px;
+  margin-bottom: 18px;
+  font-size: 20px;
   font-weight: 600;
 }
 
 /* اطلاعات کلی خانوار */
 .household-info {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .info-box {
   background: white;
   border-radius: 12px;
-  padding: 25px;
+  padding: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid #e9ecef;
   transition: all 0.3s ease;
@@ -42,13 +42,13 @@
 }
 
 .info-box p {
-  margin: 12px 0;
-  font-size: 15px;
+  margin: 10px 0;
+  font-size: 14px;
   line-height: 1.6;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 6px 0;
   border-bottom: 1px solid #f8f9fa;
 }
 
@@ -58,30 +58,31 @@
 
 .info-box strong {
   color: #495057;
-  min-width: 200px;
+  min-width: 140px;
   text-align: right;
+  font-size: 14px;
 }
 
 .info-box span {
   color: #6c757d;
   text-align: left;
   flex: 1;
+  font-size: 14px;
 }
 
 /* بخش اعضای خانوار */
 .individuals-info {
-  margin-top: 30px;
+  margin-top: 25px;
 }
 
 .individual-item {
   background: white;
   border-radius: 12px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   border: 1px solid #e9ecef;
   overflow: hidden;
   transition: all 0.3s ease;
-  padding: 40px 45px;;
 }
 
 .individual-item:hover {
@@ -91,49 +92,63 @@
 .accordion-header {
   background: linear-gradient(135deg, #77c9da, #4e92a3);
   color: white;
-  padding: 40px 45px;
+  padding: 20px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .accordion-header:hover {
   background: linear-gradient(135deg, #529bad, #4a8a9a);
 }
 
-.accordion-header span {
-  font-size: 18px;
+.member-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.member-info span {
+  font-size: 16px;
   font-weight: 600;
 }
 
 .buttons-row {
   display: flex;
-  gap: 12px;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .action-button {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 2px solid rgba(150, 32, 32, 0.3);
+  background: #f8f9fa;
+  border: 2px solid;
   border-radius: 8px;
-  padding: 10px;
+  padding: 8px 12px;
   cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
   transition: all 0.3s ease;
+  min-width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
 }
 
 .action-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
   transform: scale(1.05);
 }
 
 .accordion-body {
-  padding: 25px;
+  padding: 20px;
   background: #f8f9fa;
   animation: slideDown 0.3s ease-out;
 }
@@ -150,13 +165,13 @@
 }
 
 .accordion-body p {
-  margin: 12px 0;
+  margin: 10px 0;
   font-size: 14px;
   line-height: 1.6;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 6px 0;
   border-bottom: 1px solid #e9ecef;
 }
 
@@ -166,7 +181,7 @@
 
 .accordion-body strong {
   color: #495057;
-  min-width: 160px;
+  min-width: 140px;
   text-align: right;
   font-size: 13px;
 }
@@ -180,25 +195,25 @@
 
 .accordion-body h6 {
   color: #55adbe;
-  margin: 20px 0 15px 0;
-  font-size: 16px;
+  margin: 18px 0 12px 0;
+  font-size: 15px;
   font-weight: 600;
   border-right: 3px solid #55adbe;
-  padding-right: 10px;
+  padding-right: 8px;
 }
 
 /* اطلاعات خودرو */
 .car-info {
   background: white;
   border-radius: 8px;
-  padding: 20px;
-  margin: 15px 0;
+  padding: 16px;
+  margin: 12px 0;
   border: 1px solid #e9ecef;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .car-info p {
-  margin: 10px 0;
+  margin: 8px 0;
   border-bottom: 1px solid #f8f9fa;
 }
 
@@ -206,53 +221,106 @@
   border-bottom: none;
 }
 
+/* وضعیت سفر */
+.trip-status-label {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  /* background: #6c757d; */
+  white-space: nowrap;
+}
+
+/* بنر قرعه‌کشی */
+.lottery-banner {
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: right;
+}
+
+.lottery-banner.completed {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: 2px solid #28a745;
+}
+
+.lottery-banner.pending {
+  background: linear-gradient(135deg, #ffc107, #fd7e14);
+  color: white;
+  border: 2px solid #ffc107;
+}
+
+.banner-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.banner-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.banner-content p {
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
 /* استایل‌های loading و error */
 .household-details > p {
   text-align: center;
-  padding: 40px;
-  font-size: 18px;
+  padding: 30px;
+  font-size: 16px;
   color: #6c757d;
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  margin: 15px;
 }
 
 .household-details > div > p[style*="color: red"] {
   background: #ffebee;
   color: #d32f2f !important;
-  padding: 20px;
+  padding: 16px;
   border-radius: 8px;
   border: 1px solid #ffcdd2;
   text-align: center;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 /* ریسپانسیو برای تبلت */
 @media (max-width: 768px) {
   .household-details {
-    padding: 0 15px;
-    margin: 20px auto;
+    padding: 0 12px;
+    margin: 15px auto;
   }
   
   .household-details h2 {
-    font-size: 24px;
-    margin-bottom: 25px;
+    font-size: 22px;
+    margin-bottom: 20px;
   }
   
   .household-details h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
   
   .info-box {
-    padding: 20px;
+    padding: 16px;
   }
   
   .info-box p,
   .accordion-body p {
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
+    gap: 4px;
     text-align: right;
   }
   
@@ -260,33 +328,66 @@
   .accordion-body strong {
     min-width: auto;
     text-align: right;
-    font-size: 14px;
+    font-size: 13px;
   }
   
   .info-box span,
   .accordion-body span {
     text-align: right;
     width: 100%;
+    font-size: 13px;
   }
   
   .accordion-header {
-    padding: 15px 20px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
   
-  .accordion-header span {
-    font-size: 16px;
-  }
-  
-  .action-button {
-    padding: 8px;
+  .member-info {
+    width: 100%;
+    justify-content: space-between;
   }
   
   .buttons-row {
+    width: 100%;
+    justify-content: space-between;
     gap: 8px;
   }
   
+  .action-button {
+    min-width: 110px;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  
+  .accordion-body {
+    padding: 16px;
+  }
+  
   .car-info {
-    padding: 15px;
+    padding: 12px;
+  }
+  
+  /* بنر در تبلت */
+  .lottery-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .banner-icon {
+    font-size: 24px;
+  }
+  
+  .banner-content h3 {
+    font-size: 15px;
+  }
+  
+  .banner-content p {
+    font-size: 13px;
   }
 }
 
@@ -294,358 +395,134 @@
 @media (max-width: 480px) {
   .household-details {
     padding: 0 10px;
+    margin: 10px auto;
   }
   
   .household-details h2 {
-    font-size: 22px;
+    font-size: 20px;
+    padding-bottom: 10px;
+  }
+  
+  .household-details h3 {
+    font-size: 17px;
+    margin-bottom: 15px;
   }
   
   .info-box,
   .accordion-body {
-    padding: 15px;
-  }
-  
-  .accordion-header {
-    padding: 12px 15px;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  
-  .buttons-row {
-    align-self: flex-end;
+    padding: 12px;
+    border-radius: 10px;
   }
   
   .info-box p,
   .accordion-body p {
     font-size: 13px;
-  }
-  
-  .car-info {
-    padding: 12px;
-  }
-}
-/* بنر قرعه‌کشی */
-.lottery-banner {
-  border-radius: 15px;
-  padding: 25px;
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  text-align: right;
-}
-
-.lottery-banner.completed {
-  background: linear-gradient(135deg, #28a745, #20c997);
-  color: white;
-  border: 2px solid #28a745;
-}
-
-.lottery-banner.pending {
-  background: linear-gradient(135deg, #ffc107, #fd7e14);
-  color: white;
-  border: 2px solid #ffc107;
-}
-
-.banner-icon {
-  font-size: 36px;
-  flex-shrink: 0;
-}
-
-.banner-content h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.banner-content p {
-  margin: 0;
-  opacity: 0.9;
-  line-height: 1.5;
-}
-
-/* نشانگر وضعیت اعضا */
-.member-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex: 1;
-}
-
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.status-indicator.completed {
-  background: #28a745;
-  color: white;
-}
-
-.status-indicator.pending {
-  background: #dc3545;
-  color: white;
-}
-
-.status-icon {
-  font-size: 14px;
-}
-
-/* وضعیت سفرها در بدنه آکاردئون */
-.travel-status {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 2px solid #f0f0f0;
-}
-
-.travel-status h6 {
-  color: #495057;
-  margin-bottom: 10px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.status-badge {
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-.status-badge.no-trip {
-  background: #e3f2fd;
-  color: #1976d2;
-  border: 1px solid #bbdefb;
-}
-
-.status-badge.not-in-city {
-  background: #f3e5f5;
-  color: #7b1fa2;
-  border: 1px solid #e1bee7;
-}
-
-.status-badge.has-trips {
-  background: #e8f5e8;
-  color: #2e7d32;
-  border: 1px solid #c8e6c9;
-}
-
-.status-badge.pending {
-  background: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeaa7;
-}
-
-/* ریسپانسیو */
-@media (max-width: 768px) {
-  .lottery-banner {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-    padding: 20px;
-  }
-  
-  .banner-icon {
-    font-size: 28px;
-  }
-  
-  .banner-content h3 {
-    font-size: 16px;
-  }
-  
-  .member-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    margin: 8px 0;
   }
   
   .accordion-header {
-    flex-direction: column;
-    gap: 15px;
+    padding: 12px;
+    gap: 10px;
+  }
+  
+  .member-info span {
+    font-size: 15px;
   }
   
   .buttons-row {
-    align-self: flex-end;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
   }
-}
-
-@media (max-width: 480px) {
+  
+  .action-button {
+    width: 100%;
+    min-width: auto;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .trip-status-label {
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+  }
+  
+  .car-info {
+    padding: 10px;
+    margin: 8px 0;
+  }
+  
+  /* بنر در موبایل */
   .lottery-banner {
-    padding: 15px;
+    padding: 12px;
+    gap: 10px;
+  }
+  
+  .banner-icon {
+    font-size: 20px;
   }
   
   .banner-content h3 {
     font-size: 14px;
+    margin-bottom: 6px;
   }
   
   .banner-content p {
     font-size: 12px;
+    line-height: 1.4;
+  }
+}
+
+/* برای موبایل‌های خیلی کوچک */
+@media (max-width: 360px) {
+  .household-details {
+    padding: 0 8px;
   }
   
-  .status-indicator {
+  .household-details h2 {
+    font-size: 18px;
+  }
+  
+  .household-details h3 {
+    font-size: 16px;
+  }
+  
+  .info-box p,
+  .accordion-body p {
+    font-size: 12px;
+  }
+  
+  .action-button {
     font-size: 11px;
-    padding: 4px 10px;
-  }
-}
-/* بنر قرعه‌کشی */
-.lottery-banner {
-  border-radius: 15px;
-  padding: 25px;
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  text-align: right;
-}
-
-.lottery-banner.completed {
-  background: linear-gradient(135deg, #28a745, #20c997);
-  color: white;
-  border: 2px solid #28a745;
-}
-
-.lottery-banner.pending {
-  background: linear-gradient(135deg, #ffc107, #fd7e14);
-  color: white;
-  border: 2px solid #ffc107;
-}
-
-.banner-icon {
-  font-size: 36px;
-  flex-shrink: 0;
-}
-
-.banner-content h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.banner-content p {
-  margin: 0;
-  opacity: 0.9;
-  line-height: 1.5;
-}
-
-/* نشانگر وضعیت روی آیکن سفرها */
-.trip-status-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.status-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  border: 2px solid white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.status-badge.completed {
-  background: #28a745;
-  color: white;
-}
-
-.status-badge.pending {
-  background: #dc3545;
-  color: white;
-}
-
-.status-icon {
-  font-size: 10px;
-}
-
-.trip-button {
-  position: relative;
-}
-
-/* وضعیت سفرها در بدنه آکاردئون */
-.travel-status {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 2px solid #f0f0f0;
-}
-
-.travel-status h6 {
-  color: #495057;
-  margin-bottom: 10px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.status-text {
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-.status-text.no-trip {
-  background: #e3f2fd;
-  color: #1976d2;
-  border: 1px solid #bbdefb;
-}
-
-.status-text.not-in-city {
-  background: #f3e5f5;
-  color: #7b1fa2;
-  border: 1px solid #e1bee7;
-}
-
-.status-text.has-trips {
-  background: #e8f5e8;
-  color: #2e7d32;
-  border: 1px solid #c8e6c9;
-}
-
-.status-text.pending {
-  background: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeaa7;
-}
-
-/* ریسپانسیو */
-
-@media (max-width: 480px) {
-  .lottery-banner {
-    padding: 15px;
+    padding: 6px 10px;
   }
   
   .banner-content h3 {
-    font-size: 14px;
+    font-size: 13px;
   }
   
   .banner-content p {
-    font-size: 12px;
+    font-size: 11px;
+  }
+}
+
+/* بهبود نمایش در حالت landscape موبایل */
+@media (max-height: 500px) and (orientation: landscape) {
+  .household-details {
+    margin: 10px auto;
   }
   
-  .status-badge {
-    width: 16px;
-    height: 16px;
-    top: -3px;
-    right: -3px;
+  .individual-item {
+    margin-bottom: 10px;
   }
   
-  .status-icon {
-    font-size: 8px;
+  .accordion-header {
+    padding: 12px 16px;
+  }
+  
+  .accordion-body {
+    padding: 12px 16px;
   }
 }

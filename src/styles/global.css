@@ -424,3 +424,30 @@ button:not(.modal-button):disabled {
     padding: 4px;
   }
 }
+/* استایل برای متن‌های تاکیدی */
+.highlight-text {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 2px;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+/* برای بنر completed */
+.lottery-banner.completed .highlight-text {
+  background: linear-gradient(135deg, #51cf66, #2f9e44);
+}
+
+/* ریسپانسیو برای موبایل */
+@media (max-width: 480px) {
+  .highlight-text {
+    padding: 1px 6px;
+    font-size: 0.9em;
+    margin: 0 1px;
+  }
+}

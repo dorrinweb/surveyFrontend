@@ -102,18 +102,19 @@ const HouseholdDetailsPage = () => {
           </div>
         </div>
       ) : (
-        <div className="lottery-banner pending">
-          <div className="banner-icon">
-            <FaGift />
-          </div>
-          <div className="banner-content">
-            <h3>📝 لطفاً وضعیت سفرهای تمامی اعضای خانوار را تکمیل کنید</h3>
-            <p>
-              برای شرکت در قرعه‌کشی، وضعیت سفرهای تمام اعضای خانوار را مشخص
-              کنید.
-            </p>
-          </div>
-        </div>
+<div className="lottery-banner pending">
+  <div className="banner-icon">
+    <FaGift />
+  </div>
+  <div className="banner-content">
+    <h3>📝 لطفاً وضعیت سفرهای <span className="highlight-text">تمامی اعضای خانوار</span> را تکمیل کنید</h3>
+    <p>
+      برای شرکت در قرعه‌کشی، وضعیت سفرهای تمام اعضای خانوار در روز 
+      <span className="highlight-text"> سه شنبه ۲۰ آبان ماه </span>
+      را مشخص کنید. در صورتی که عضوی از خانوار در این تاریخ سفری نداشته است از بخش گزینه های دیگر وضعیت فرد موردنظر را تعیین نمایید
+    </p>
+  </div>
+</div>
       )}
 
       {/* اطلاعات خانوار */}
@@ -156,43 +157,93 @@ const HouseholdDetailsPage = () => {
 
                 <div className="buttons-row">
                   {/* دکمه مشخصات */}
-                  <button
-                    className="action-button"
-                    onClick={() => toggleAccordion(index)}
-                    title="مشاهده مشخصات"
-                  >
-                    <FaInfoCircle size={20} />
-                  </button>
+                 
 
-                  {/* دکمه سفرها با رنگ و متن وضعیت */}
-                  <div className="trip-button-wrapper">
-                    <button
-                      className="action-button"
-                      onClick={() => handleViewTrips(individual.id)}
-                      title="مشاهده سفرها"
-                    >
-                      <FaRoute
-                        size={20}
-                        style={{ color: routeColor, transition: "color 0.3s" }}
-                      />
-                    </button>
-                    
-                  </div>
-                  <span
-                      className="trip-status-label"
-                      style={{
-                        color: routeColor,
-                        fontSize: "0.8rem",
-                        marginTop: "4px",
-                        display: "block",
-                        textAlign: "center",
-                        opacity: 1,
-                      }}
-                    >
-                      {individualStatus === "completed"
-                        ? "تکمیل‌شده"
-                        : "در انتظار"}
-                    </span>
+               {/* دکمه سفرها با متن وضعیت */}
+               <div className="buttons-row">
+  {/* دکمه مشخصات */}
+  <button
+    className="action-button"
+    onClick={() => toggleAccordion(index)}
+    title="مشاهده مشخصات"
+    style={{
+      backgroundColor: '#f8f9fa',
+      color: '#007bff',
+      border: '2px solid #007bff',
+      padding: '8px 12px',
+      borderRadius: '6px',
+      cursor: 'pointer',
+      fontSize: '12px',
+      fontWeight: 'bold',
+      transition: 'all 0.3s ease',
+      minWidth: '120px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '8px'
+    }}
+    onMouseEnter={(e) => {
+      e.target.style.backgroundColor = '#007bff';
+      e.target.style.color = 'white';
+      e.target.style.transform = 'scale(1.05)';
+    }}
+    onMouseLeave={(e) => {
+      e.target.style.backgroundColor = '#f8f9fa';
+      e.target.style.color = '#007bff';
+      e.target.style.transform = 'scale(1)';
+    }}
+  >
+    مشخصات عضو
+  </button>
+
+  {/* دکمه سفرها با متن وضعیت */}
+  <button
+    className="action-button"
+    onClick={() => handleViewTrips(individual.id)}
+    title="مشاهده سفرها"
+    style={{
+      backgroundColor: '#f8f9fa',
+      color: routeColor,
+      border: `2px solid ${routeColor}`,
+      padding: '8px 12px',
+      borderRadius: '6px',
+      cursor: 'pointer',
+      fontSize: '12px',
+      fontWeight: 'bold',
+      transition: 'all 0.3s ease',
+      minWidth: '120px'
+    }}
+    onMouseEnter={(e) => {
+      e.target.style.backgroundColor = routeColor;
+      e.target.style.color = 'white';
+      e.target.style.transform = 'scale(1.05)';
+    }}
+    onMouseLeave={(e) => {
+      e.target.style.backgroundColor = '#f8f9fa';
+      e.target.style.color = routeColor;
+      e.target.style.transform = 'scale(1)';
+    }}
+  >
+    وضعیت سفرهای این عضو
+  </button>
+
+  <span
+    className="trip-status-label"
+    style={{
+      color: routeColor,
+      fontSize: "0.8rem",
+      marginTop: "4px",
+      display: "block",
+      textAlign: "center",
+      opacity: 1,
+    }}
+  >
+    {individualStatus === "completed"
+      ? "تکمیل‌شده"
+      : "در انتظار"}
+  </span>
+</div>
+                  
                 </div>
               </div>
 

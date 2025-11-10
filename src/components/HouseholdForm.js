@@ -4,171 +4,151 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../styles/global.css";
 import { FiMapPin } from "react-icons/fi";
-import ReviewPage from "./ReviewPage"; // ایمپورت کامپوننت جدید
+import ReviewPage from "./ReviewPage";
 
 const HouseholdForm = () => {
-  const [step, setStep] = useState(1); // مرحله فعلی
-  const [showMap, setShowMap] = useState(false); // نمایش یا عدم نمایش نقشه
+  const [step, setStep] = useState(1);
+  const [showMap, setShowMap] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false); // مدال راهنما بعد از مرحله 1
   const [selectedLocation, setSelectedLocation] = useState({
-    lat: 37.5553, // ارومیه
-    lng: 45.0725, // ارومیه
+    lat: 37.5553,
+    lng: 45.0725,
   });
   const [householdData, setHouseholdData] = useState({
     address: "",
-    householdCount: "", // تعداد اعضای خانوار
-    carCount: "", // تعداد ماشین‌ها
-    parkingSpacesCount: "", // تعداد پارکینگ‌های در اختیار
+    householdCount: "",
+    carCount: "",
+    parkingSpacesCount: "",
     postCode: "",
   });
 
-  const [individuals, setIndividuals] = useState([]); // اطلاعات افراد خانوار
-  const [householdCountError, setHouseholdCountError] = useState(""); // خطای تعداد اعضای خانوار
-  const [carCountError, setCarCountError] = useState(""); // خطای تعداد ماشین‌ها
-  const [parkingSpacesError, setParkingSpacesError] = useState(""); // خطای تعداد پارکینگ‌های در اختیار
-  const [customRelation, setCustomRelation] = useState(""); // ذخیره مقدار وارد شده توسط کاربر برای گزینه "سایر"
-  const [carYearError, setCarYearError] = useState(""); // خطای سال ماشین
-  const [postCodeError, setPostCodeError] = useState(""); // خطای کد پستی خانوار
-
-  const [currentMemberIndex, setCurrentMemberIndex] = useState(0); // شاخص فرد فعلی که اطلاعاتش وارد می‌شود
-  const [workStartHourError, setWorkStartHourError] = useState(""); // خطای ساعت شروع کار
+  const [individuals, setIndividuals] = useState([]);
+  const [householdCountError, setHouseholdCountError] = useState("");
+  const [carCountError, setCarCountError] = useState("");
+  const [parkingSpacesError, setParkingSpacesError] = useState("");
+  const [customRelation, setCustomRelation] = useState("");
+  const [carYearError, setCarYearError] = useState("");
+  const [postCodeError, setPostCodeError] = useState("");
+  const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
+  const [workStartHourError, setWorkStartHourError] = useState("");
 
   // تابع تبدیل اعداد فارسی به انگلیسی
-// تابع تبدیل اعداد فارسی به انگلیسی - نسخه اصلاح شده
-// تابع تبدیل اعداد فارسی به انگلیسی
-const convertToEnglishNumbers = (str) => {
-  if (str === null || str === undefined) return '';
-  const stringValue = String(str);
-  
-  const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-  const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  
-  let result = stringValue;
-  for (let i = 0; i < 10; i++) {
-    const regex = new RegExp(persianNumbers[i], 'g');
-    result = result.replace(regex, englishNumbers[i]);
-  }
-  return result;
-};
-
-const handleHouseholdChange = (e) => {
-  const { name, value } = e.target;
-
-  // تبدیل اعداد فارسی به انگلیسی برای تمام فیلدهای عددی
-  const convertedValue = convertToEnglishNumbers(value);
-
-  if (name === "householdCount") {
-    // اگر فیلد خالی باشد یا نامعتبر باشد
-    if (!value.trim() || isNaN(convertedValue) || parseInt(convertedValue) < 1) {
-      setHouseholdCountError("لطفاً عددی بزرگتر یا مساوی 1 وارد کنید.");
-      setIndividuals([]); // اگر مقدار نامعتبر باشد یا فیلد خالی باشد، آرایه افراد پاک شود
-    } else {
-      setHouseholdCountError(""); // پاک کردن پیام خطا
-      setIndividuals(new Array(parseInt(convertedValue)).fill({ // ایجاد آرایه به اندازه تعداد اعضا
-        hasDrivingLicense: "",
-        hasCarOwnership: "",
-        relationWithHouseHold: "",
-        gender: "", // فیلد ضروری جنسیت
-        education: "",
-        job: "",
-        workStartHour: { hour: "", minute: "", period: "" }, // فیلد جدید برای ساعت شروع کار
-        carDetails: {
-          carType: "",
-          carName: "",
-          carYear: "",
-          fuelType: "",
-        },
-        income: "",
-        expenses: "",
-      }));
+  const convertToEnglishNumbers = (str) => {
+    if (str === null || str === undefined) return '';
+    const stringValue = String(str);
+    
+    const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    
+    let result = stringValue;
+    for (let i = 0; i < 10; i++) {
+      const regex = new RegExp(persianNumbers[i], 'g');
+      result = result.replace(regex, englishNumbers[i]);
     }
-  }
+    return result;
+  };
 
-  if (name === "carCount") {
-    // ولیدیشن برای تعداد ماشین‌ها: باید عدد و بزرگتر یا مساوی صفر باشد
-    if (!value.trim() || isNaN(convertedValue) || parseInt(convertedValue) < 0) {
-      setCarCountError("لطفاً عددی بزرگتر یا مساوی 0 وارد کنید.");
-    } else {
-      setCarCountError(""); // پاک کردن پیام خطا
+  const handleHouseholdChange = (e) => {
+    const { name, value } = e.target;
+    const convertedValue = convertToEnglishNumbers(value);
+
+    if (name === "householdCount") {
+      if (!value.trim() || isNaN(convertedValue) || parseInt(convertedValue) < 1) {
+        setHouseholdCountError("لطفاً عددی بزرگتر یا مساوی 1 وارد کنید.");
+        setIndividuals([]);
+      } else {
+        setHouseholdCountError("");
+        setIndividuals(new Array(parseInt(convertedValue)).fill({
+          hasDrivingLicense: "",
+          hasCarOwnership: "",
+          relationWithHouseHold: "",
+          gender: "",
+          education: "",
+          job: "",
+          workStartHour: { hour: "", minute: "", period: "" },
+          carDetails: {
+            carType: "",
+            carName: "",
+            carYear: "",
+            fuelType: "",
+          },
+          income: "",
+          expenses: "",
+        }));
+      }
     }
-  }
 
-  if (name === "parkingSpacesCount") {
-    // ولیدیشن برای تعداد پارکینگ‌ها: باید عدد و بزرگتر یا مساوی صفر باشد
-    if (!value.trim() || isNaN(convertedValue) || parseInt(convertedValue) < 0) {
-      setParkingSpacesError("لطفاً عددی بزرگتر یا مساوی 0 وارد کنید.");
-    } else {
-      setParkingSpacesError(""); // پاک کردن پیام خطا
+    if (name === "carCount") {
+      if (!value.trim() || isNaN(convertedValue) || parseInt(convertedValue) < 0) {
+        setCarCountError("لطفاً عددی بزرگتر یا مساوی 0 وارد کنید.");
+      } else {
+        setCarCountError("");
+      }
     }
-  }
 
-  if (name === "postCode") {
-    // اگر فیلد خالی است، چون اختیاری است خطایی ندارد
-    if (!value.trim()) {
-      setPostCodeError("");
-    } else if (!/^\d{10}$/.test(convertedValue)) {
-      setPostCodeError("کد پستی باید عددی ۱۰ رقمی باشد.");
-    } else {
-      setPostCodeError("");
+    if (name === "parkingSpacesCount") {
+      if (!value.trim() || isNaN(convertedValue) || parseInt(convertedValue) < 0) {
+        setParkingSpacesError("لطفاً عددی بزرگتر یا مساوی 0 وارد کنید.");
+      } else {
+        setParkingSpacesError("");
+      }
     }
-  }
-  
-  // مقدار تبدیل شده را در فیلد نمایش می‌دهیم
-  setHouseholdData({ ...householdData, [name]: convertedValue });
-};
-const handleIndividualChange = (e) => {
-  const { name, value } = e.target;
 
-  const updatedIndividuals = [...individuals];
+    if (name === "postCode") {
+      if (!value.trim()) {
+        setPostCodeError("");
+      } else if (!/^\d{10}$/.test(convertedValue)) {
+        setPostCodeError("کد پستی باید عددی ۱۰ رقمی باشد.");
+      } else {
+        setPostCodeError("");
+      }
+    }
+    
+    setHouseholdData({ ...householdData, [name]: convertedValue });
+  };
 
-  if (name === "hour" || name === "minute" || name === "period") {
-    // فقط برای ساعت و دقیقه تبدیل عدد انجام شود
-    if (name === "hour" || name === "minute") {
-      const convertedValue = convertToEnglishNumbers(value);
-      
-      updatedIndividuals[currentMemberIndex].workStartHour = {
-        ...updatedIndividuals[currentMemberIndex].workStartHour,
-        [name]: convertedValue,
-      };
+  const handleIndividualChange = (e) => {
+    const { name, value } = e.target;
+    const updatedIndividuals = [...individuals];
+
+    if (name === "hour" || name === "minute" || name === "period") {
+      if (name === "hour" || name === "minute") {
+        const convertedValue = convertToEnglishNumbers(value);
+        updatedIndividuals[currentMemberIndex].workStartHour = {
+          ...updatedIndividuals[currentMemberIndex].workStartHour,
+          [name]: convertedValue,
+        };
+      } else {
+        updatedIndividuals[currentMemberIndex].workStartHour = {
+          ...updatedIndividuals[currentMemberIndex].workStartHour,
+          [name]: value,
+        };
+      }
+      setWorkStartHourError("");
     } else {
-      // برای period فقط مقدار را ذخیره کن
-      updatedIndividuals[currentMemberIndex].workStartHour = {
-        ...updatedIndividuals[currentMemberIndex].workStartHour,
+      updatedIndividuals[currentMemberIndex] = {
+        ...updatedIndividuals[currentMemberIndex],
         [name]: value,
       };
     }
+
+    setIndividuals(updatedIndividuals);
+  };
+
+  const handleKeyPress = (e) => {
+    const key = e.key;
+    const allowedKeys = [
+      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹',
+      'Backspace', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Delete'
+    ];
     
-    setWorkStartHourError(""); // پاک کردن هرگونه خطا
-  } else {
-    // برای سایر فیلدها
-    updatedIndividuals[currentMemberIndex] = {
-      ...updatedIndividuals[currentMemberIndex],
-      [name]: value,
-    };
-  }
-
-  setIndividuals(updatedIndividuals);
-};
-
-
-
-// تابع جدید برای جلوگیری از ورود حروف
-const handleKeyPress = (e) => {
-  const key = e.key;
-  
-  // لیست کاراکترهای مجاز
-  const allowedKeys = [
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', // اعداد انگلیسی
-    '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', // اعداد فارسی
-    'Backspace', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Delete'
-  ];
-  
-  // اگر کلید فشار داده شده در لیست مجازها نیست، جلوگیری کن
-  if (!allowedKeys.includes(key)) {
-    e.preventDefault();
-    return false;
-  }
-  return true;
-};
+    if (!allowedKeys.includes(key)) {
+      e.preventDefault();
+      return false;
+    }
+    return true;
+  };
 
   const isStep1Valid = () => {
     return (
@@ -193,7 +173,6 @@ const handleKeyPress = (e) => {
       currentMember?.gender !== "" &&
       currentMember?.education !== "" &&
       currentMember?.job !== "" &&
-      // حذف شرط اجباری برای درآمد و هزینه
       (currentMember?.relationWithHouseHold !== "other" || customRelation !== "") &&
       (currentMember?.hasCarOwnership !== "true" || (
         currentMember?.carDetails?.carType &&
@@ -204,9 +183,12 @@ const handleKeyPress = (e) => {
       ))
     );
   };
+
+  // تغییر در تابع handleNextStep برای نمایش مدال بعد از مرحله 1
   const handleNextStep = () => {
     if (step === 1 && isStep1Valid()) {
-      setStep(2);
+      // نمایش مدال راهنما قبل از رفتن به مرحله 2
+      setShowInfoModal(true);
     } else if (step === 2) {
       if (currentMemberIndex + 1 === individuals.length) {
         setStep(3);
@@ -214,6 +196,12 @@ const handleKeyPress = (e) => {
         setCurrentMemberIndex(currentMemberIndex + 1);
       }
     }
+  };
+
+  // تابع برای ادامه به مرحله 2 بعد از تأیید کاربر
+  const handleContinueToStep2 = () => {
+    setShowInfoModal(false);
+    setStep(2);
   };
 
   const handlePreviousStep = () => {
@@ -232,14 +220,11 @@ const handleKeyPress = (e) => {
 
   const handleMapClick = (event) => {
     const { lat, lng } = event.latlng;
-
     setSelectedLocation({ lat, lng });
-
     setHouseholdData({
       ...householdData,
       address: `Latitude: ${lat}, Longitude: ${lng}`,
     });
-
     setShowMap(false);
   };
 
@@ -252,22 +237,20 @@ const handleKeyPress = (e) => {
 
   const handleCarDetailsChange = (e) => {
     const { name, value } = e.target;
-
     const updatedIndividuals = [...individuals];
 
     if (name === "carYear") {
-      // بررسی چهار رقمی بودن سال خودرو
       const convertedValue = convertToEnglishNumbers(value);
       const numericValue = parseInt(convertedValue, 10);
 
       if (!value.trim()) {
-        setCarYearError("لطفاً سال خودرو را وارد کنید."); // نمایش خطا برای مقدار خالی
+        setCarYearError("لطفاً سال خودرو را وارد کنید.");
       } else if (isNaN(numericValue) || numericValue <= 0) {
-        setCarYearError("لطفاً یک عدد معتبر وارد کنید."); // نمایش خطا برای مقدار نامعتبر
+        setCarYearError("لطفاً یک عدد معتبر وارد کنید.");
       } else if (convertedValue.length !== 4) {
-        setCarYearError("سال خودرو باید چهار رقمی باشد."); // نمایش خطا برای چهار رقمی نبودن
+        setCarYearError("سال خودرو باید چهار رقمی باشد.");
       } else {
-        setCarYearError(""); // پاک کردن خطا در صورت معتبر بودن
+        setCarYearError("");
       }
 
       updatedIndividuals[currentMemberIndex].carDetails = {
@@ -290,34 +273,37 @@ const handleKeyPress = (e) => {
 
       {step === 1 && (
         <div>
-    <label>آدرس خانوار: <span style={{ color: "red" }}>*</span></label>
-    <div className="location-field" onClick={() => setShowMap(true)}>
+          {/* بخش آدرس */}
+          <label>آدرس خانوار: <span style={{ color: "red" }}>*</span></label>
+          <div className="location-field" onClick={() => setShowMap(true)}>
+            <input
+              type="text"
+              name="address"
+              placeholder="انتخاب موقعیت خانوار"
+              value={householdData.address}
+              readOnly
+            />
+            <FiMapPin className="location-icon" style={{ 
+              pointerEvents: "none",
+              position: "absolute",
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)"
+            }} />
+          </div>
 
-    <input
-        type="text"
-        name="address"
-        placeholder="انتخاب موقعیت خانوار"
-        value={householdData.address}
-        readOnly
-      />
-  <FiMapPin className="location-icon" style={{ 
-        pointerEvents: "none", // جلوگیری از تداخل با کلیک
-        position: "absolute",
-        right: "10px",
-        top: "50%",
-        transform: "translateY(-50%)"
-      }} />
-</div>
-<label>کد پستی خانوار:</label>
-    <input
-      type="text"
-      name="postCode"
-      placeholder="کد پستی را وارد کنید"
-  value={householdData.postCode}
-  onChange={handleHouseholdChange}
-/>
-{postCodeError && <p className="error">{postCodeError}</p>}
-          {/* فیلد تعداد اعضای خانوار */}
+          {/* بخش کد پستی */}
+          <label>کد پستی خانوار:</label>
+          <input
+            type="text"
+            name="postCode"
+            placeholder="کد پستی را وارد کنید"
+            value={householdData.postCode}
+            onChange={handleHouseholdChange}
+          />
+          {postCodeError && <p className="error">{postCodeError}</p>}
+
+          {/* بخش تعداد اعضای خانوار */}
           <label>تعداد اعضای خانوار: <span style={{ color: "red" }}>*</span></label>
           <input
             type="text"
@@ -328,7 +314,7 @@ const handleKeyPress = (e) => {
           />
           {householdCountError && <p className="error">{householdCountError}</p>}
 
-          {/* فیلد تعداد ماشین‌ها */}
+          {/* بخش تعداد ماشین‌ها */}
           <label>تعداد ماشین‌ها: <span style={{ color: "red" }}>*</span></label>
           <input
             type="text"
@@ -339,7 +325,7 @@ const handleKeyPress = (e) => {
           />
           {carCountError && <p className="error">{carCountError}</p>}
 
-          {/* فیلد تعداد پارکینگ‌های در اختیار */}
+          {/* بخش تعداد پارکینگ‌ها */}
           <label>تعداد پارکینگ‌های در اختیار: <span style={{ color: "red" }}>*</span></label>
           <input
             type="text"
@@ -363,9 +349,9 @@ const handleKeyPress = (e) => {
 
       {step === 2 && (
         <div>
-          <h3>اطلاعات عضو {currentMemberIndex + 1}:</h3>
+          <h3>اطلاعات عضو {currentMemberIndex + 1} از {individuals.length}</h3>
 
-          {/* فیلد جنسیت */}
+          {/* فیلدهای اطلاعات فردی */}
           <label>جنسیت: <span style={{ color: "red" }}>*</span></label>
           <select
             name="gender"
@@ -376,7 +362,6 @@ const handleKeyPress = (e) => {
             <option value="مرد">مرد</option>
             <option value="زن">زن</option>
           </select>
-          
 
           <label>تحصیلات: <span style={{ color: "red" }}>*</span></label>
           <select
@@ -417,39 +402,39 @@ const handleKeyPress = (e) => {
           </select>
 
           <div>
-  <label>ساعت شروع کار:</label>
-  <div className="time-fields">
-    <input
-      type="text"
-      name="hour"
-      placeholder="ساعت"
-      value={individuals[currentMemberIndex]?.workStartHour?.hour || ""}
-      onChange={handleIndividualChange}
-      onKeyPress={handleKeyPress} // اضافه کردن این خط
-      maxLength="2"
-    />
-    <span>:</span>
-    <input
-      type="text"
-      name="minute"
-      placeholder="دقیقه"
-      value={individuals[currentMemberIndex]?.workStartHour?.minute || ""}
-      onChange={handleIndividualChange}
-      onKeyPress={handleKeyPress} // اضافه کردن این خط
-      maxLength="2"
-    />
-    <select
-      name="period"
-      value={individuals[currentMemberIndex]?.workStartHour?.period || ""}
-      onChange={handleIndividualChange}
-    >
-      <option value="">زمان</option>
-      <option value="صبح">صبح</option>
-      <option value="عصر">عصر</option>
-    </select>
-  </div>
-  {workStartHourError && <p className="error">{workStartHourError}</p>}
-</div>
+            <label>ساعت شروع کار:</label>
+            <div className="time-fields">
+              <input
+                type="text"
+                name="hour"
+                placeholder="ساعت"
+                value={individuals[currentMemberIndex]?.workStartHour?.hour || ""}
+                onChange={handleIndividualChange}
+                onKeyPress={handleKeyPress}
+                maxLength="2"
+              />
+              <span>:</span>
+              <input
+                type="text"
+                name="minute"
+                placeholder="دقیقه"
+                value={individuals[currentMemberIndex]?.workStartHour?.minute || ""}
+                onChange={handleIndividualChange}
+                onKeyPress={handleKeyPress}
+                maxLength="2"
+              />
+              <select
+                name="period"
+                value={individuals[currentMemberIndex]?.workStartHour?.period || ""}
+                onChange={handleIndividualChange}
+              >
+                <option value="">زمان</option>
+                <option value="صبح">صبح</option>
+                <option value="عصر">عصر</option>
+              </select>
+            </div>
+            {workStartHourError && <p className="error">{workStartHourError}</p>}
+          </div>
 
           <label>گواهی‌نامه: <span style={{ color: "red" }}>*</span></label>
           <select
@@ -461,6 +446,7 @@ const handleKeyPress = (e) => {
             <option value="true">دارد</option>
             <option value="false">ندارد</option>
           </select>
+
           <label>ماشین شخصی در اختیار دارد؟ <span style={{ color: "red" }}>*</span></label>
           <select
             name="hasCarOwnership"
@@ -504,7 +490,7 @@ const handleKeyPress = (e) => {
                 value={individuals[currentMemberIndex]?.carDetails?.carYear || ""}
                 onChange={handleCarDetailsChange}
               />
-              {carYearError && <p className="error">{carYearError}</p>} {/* نمایش خطا */}
+              {carYearError && <p className="error">{carYearError}</p>}
 
               <label>نوع سوخت خودرو: <span style={{ color: "red" }}>*</span></label>
               <select
@@ -524,10 +510,10 @@ const handleKeyPress = (e) => {
 
           <label>میزان درآمد ماهانه (میلیون تومان):</label>
           <select
-  name="income"
-  value={individuals[currentMemberIndex]?.income || ""}
-  onChange={handleIndividualChange}
->
+            name="income"
+            value={individuals[currentMemberIndex]?.income || ""}
+            onChange={handleIndividualChange}
+          >
             <option value="">انتخاب کنید</option>
             <option value="زیر ۱۰ میلیون تومان">زیر ۱۰ میلیون تومان</option>
             <option value="بین ۱۰ تا ۲۰ میلیون تومان">بین ۱۰ تا ۲۰ میلیون تومان</option>
@@ -537,11 +523,10 @@ const handleKeyPress = (e) => {
 
           <label>میزان هزینه ماهانه (میلیون تومان):</label>
           <select
-  name="expenses"
-  value={individuals[currentMemberIndex]?.expenses || ""}
-  onChange={handleIndividualChange}
->
-            <option value="">انتخاب کنید</option>
+            name="expenses"
+            value={individuals[currentMemberIndex]?.expenses || ""}
+            onChange={handleIndividualChange}
+          >
             <option value="">انتخاب کنید</option>
             <option value="زیر ۱۰ میلیون تومان">زیر ۱۰ میلیون تومان</option>
             <option value="بین ۱۰ تا ۲۰ میلیون تومان">بین ۱۰ تا ۲۰ میلیون تومان</option>
@@ -550,7 +535,6 @@ const handleKeyPress = (e) => {
           </select>
 
           <div style={{ marginTop: "20px" }}></div>
-
 
           <label>نسبت با خانوار: <span style={{ color: "red" }}>*</span></label>
           <select
@@ -580,14 +564,13 @@ const handleKeyPress = (e) => {
           <button onClick={handlePreviousStep}>مرحله قبل</button>
           {isStep2Valid() && (
             <button onClick={() => {
-              if (currentMemberIndex === parseInt(householdData.householdCount)) {
+              if (currentMemberIndex + 1 === individuals.length) {
                 setStep(3);
               } else {
                 handleNextStep();
               }
-            }} disabled={!isStep2Valid()} // دکمه تنها در صورتی فعال است که تمام فیلدها معتبر باشند
-            >
-              {currentMemberIndex + 1 === parseInt(householdData.householdCount)
+            }} disabled={!isStep2Valid()}>
+              {currentMemberIndex + 1 === individuals.length
                 ? "مشاهده اطلاعات و تایید نهایی"
                 : `ادامه: اطلاعات عضو ${currentMemberIndex + 2}`}
             </button>
@@ -605,6 +588,7 @@ const handleKeyPress = (e) => {
         />
       )}
 
+      {/* مدال نقشه */}
       <Modal show={showMap} onHide={() => setShowMap(false)} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>انتخاب موقعیت مکانی</Modal.Title>
@@ -616,12 +600,50 @@ const handleKeyPress = (e) => {
             style={{ height: "80vh", width: "100%" }}
           >
             <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" // نقشه OpenStreetMap
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker position={selectedLocation}></Marker>
             <MapClickHandler />
           </MapContainer>
         </Modal.Body>
+      </Modal>
+
+      {/* مدال راهنما بعد از مرحله 1 */}
+      <Modal show={showInfoModal} onHide={() => setShowInfoModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>📋 تأیید اطلاعات خانوار</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="info-modal-content">
+            <h4>لطفاً اطلاعات وارد شده را بررسی کنید:</h4>
+            <div className="info-summary">
+              <p><strong>تعداد اعضای خانوار:</strong> {householdData.householdCount} نفر</p>
+              <p><strong>تعداد ماشین‌ها:</strong> {householdData.carCount} دستگاه</p>
+              <p><strong>تعداد پارکینگ‌ها:</strong> {householdData.parkingSpacesCount} جای پارک</p>
+            </div>
+            <div className="info-reminder">
+              <p>✅ <strong>توجه:</strong> تعداد اعضای خانوار باید شامل <strong>همه افرادی</strong> باشد که در این خانوار زندگی می‌کنند (پدر، مادر، فرزندان و سایر اعضای دائمی)</p>
+            </div>
+            <p>آیا اطلاعات فوق صحیح است؟</p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer style={{ justifyContent: 'space-between' }}>
+          <button 
+            className="btn btn-secondary"
+            onClick={() => {
+              setShowInfoModal(false);
+              setStep(1); // بازگشت به مرحله 1 برای اصلاح
+            }}
+          >
+            ✏️ اصلاح می‌کنم
+          </button>
+          <button 
+            className="btn btn-primary"
+            onClick={handleContinueToStep2}
+          >
+            ✅ درست است، ادامه می‌دهم
+          </button>
+        </Modal.Footer>
       </Modal>
     </div>
   );
