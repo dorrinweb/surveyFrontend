@@ -1,6 +1,8 @@
-import axios from 'axios';
+// src/services/userService.js
+import axios from "./axiosInterceptor";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const userService = {
   getPassword: async (data) => {
     try {
@@ -17,7 +19,7 @@ const userService = {
     }
   },
 
-   login : async (payload) => {
+  login: async (payload) => {
     try {
       const response = await fetch(`${API_BASE_URL}/user/login`, {
         method: "POST",
@@ -27,26 +29,25 @@ const userService = {
         },
         body: JSON.stringify(payload),
       });
-  
+
       if (!response.ok) {
         throw new Error(`خطا در ارسال اطلاعات: ${response.statusText}`);
       }
-  
+
       const responseData = await response.json();
-      console.log(responseData.data)
-      const { accessToken, refreshToken } = responseData.data; // استخراج توکن‌ها
-  
-      // ذخیره توکن‌ها در Local Storage
+      console.log(responseData.data);
+      
+      const { accessToken, refreshToken } = responseData.data;
+
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-  
+
       return responseData;
     } catch (error) {
       console.error("خطا در لاگین:", error);
       throw error;
     }
-  
   }
-}
+};
 
 export default userService;
