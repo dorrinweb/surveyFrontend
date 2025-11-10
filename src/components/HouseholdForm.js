@@ -411,42 +411,62 @@ const HouseholdForm = () => {
             <option value="خانه‌دار">خانه‌دار</option>
             <option value="سایر">سایر</option>
           </select>
-
           <div>
-            <label>ساعت شروع کار:</label>
-            <div className="time-fields">
-              <input
-                type="text"
-                name="hour"
-                placeholder="ساعت"
-                value={individuals[currentMemberIndex]?.workStartHour?.hour || ""}
-                onChange={handleIndividualChange}
-                onKeyPress={handleKeyPress}
-                maxLength="2"
-              />
-              <span>:</span>
-              <input
-                type="text"
-                name="minute"
-                placeholder="دقیقه"
-                value={individuals[currentMemberIndex]?.workStartHour?.minute || ""}
-                onChange={handleIndividualChange}
-                onKeyPress={handleKeyPress}
-                maxLength="2"
-              />
-              <select
-                name="period"
-                value={individuals[currentMemberIndex]?.workStartHour?.period || ""}
-                onChange={handleIndividualChange}
-              >
-                <option value="">زمان</option>
-                <option value="صبح">صبح</option>
-                <option value="عصر">عصر</option>
-              </select>
-            </div>
-            {workStartHourError && <p className="error">{workStartHourError}</p>}
-          </div>
-
+          <div>
+  <label>ساعت شروع کار:</label>
+  <div className="time-fields">
+    <input
+      type="text"
+      name="hour"
+      placeholder="ساعت"
+      value={individuals[currentMemberIndex]?.workStartHour?.hour || ""}
+      onChange={handleIndividualChange}
+      onInput={(e) => {
+        // فقط اعداد فارسی و انگلیسی مجاز
+        e.target.value = e.target.value.replace(/[^۰-۹0-9]/g, '');
+        // اگر بیشتر از ۲۳ شد، ۲۳ قرار بده
+        if (parseInt(e.target.value) > 23) {
+          e.target.value = '23';
+        }
+      }}
+      onKeyPress={handleKeyPress}
+      maxLength="2"
+      pattern="[0-9]*"
+      inputMode="numeric"
+    />
+    <span>:</span>
+    <input
+      type="text"
+      name="minute"
+      placeholder="دقیقه"
+      value={individuals[currentMemberIndex]?.workStartHour?.minute || ""}
+      onChange={handleIndividualChange}
+      onInput={(e) => {
+        // فقط اعداد فارسی و انگلیسی مجاز
+        e.target.value = e.target.value.replace(/[^۰-۹0-9]/g, '');
+        // اگر بیشتر از ۵۹ شد، ۵۹ قرار بده
+        if (parseInt(e.target.value) > 59) {
+          e.target.value = '59';
+        }
+      }}
+      onKeyPress={handleKeyPress}
+      maxLength="2"
+      pattern="[0-9]*"
+      inputMode="numeric"
+    />
+    <select
+      name="period"
+      value={individuals[currentMemberIndex]?.workStartHour?.period || ""}
+      onChange={handleIndividualChange}
+    >
+      <option value="">زمان</option>
+      <option value="صبح">صبح</option>
+      <option value="عصر">عصر</option>
+    </select>
+  </div>
+  {workStartHourError && <p className="error">{workStartHourError}</p>}
+</div>
+</div>
           <label>گواهی‌نامه: <span style={{ color: "red" }}>*</span></label>
           <select
             name="hasDrivingLicense"
@@ -493,14 +513,25 @@ const HouseholdForm = () => {
                 onChange={handleCarDetailsChange}
               />
 
-              <label>سال تولید خودرو: <span style={{ color: "red" }}>*</span></label>
-              <input
-                type="text"
-                name="carYear"
-                placeholder="سال تولید خودرو"
-                value={individuals[currentMemberIndex]?.carDetails?.carYear || ""}
-                onChange={handleCarDetailsChange}
-              />
+<label>سال تولید خودرو: <span style={{ color: "red" }}>*</span></label>
+<input
+  type="text"
+  name="carYear"
+  placeholder="سال تولید خودرو"
+  value={individuals[currentMemberIndex]?.carDetails?.carYear || ""}
+  onChange={handleCarDetailsChange}
+  onInput={(e) => {
+    // فقط اعداد فارسی و انگلیسی مجاز
+    e.target.value = e.target.value.replace(/[^۰-۹0-9]/g, '');
+    // محدودیت طول به ۴ رقم
+    if (e.target.value.length > 4) {
+      e.target.value = e.target.value.slice(0, 4);
+    }
+  }}
+  maxLength="4"
+  pattern="[0-9]*"
+  inputMode="numeric"
+/>
               {carYearError && <p className="error">{carYearError}</p>}
 
               <label>نوع سوخت خودرو: <span style={{ color: "red" }}>*</span></label>
