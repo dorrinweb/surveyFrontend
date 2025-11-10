@@ -611,12 +611,13 @@ if (trip.tripFee.trim() !== "" && parseFloat(trip.tripFee) < 0) {
       </form>
 
       <div className="button-container">
+      <button onClick={handleNextTrip} >
+    سفر بعدی
+  </button>
   <button onClick={handlePreviousTrip} >
     صفحه قبلی
   </button>
-  <button onClick={handleNextTrip} >
-    سفر بعدی
-  </button>
+  
   <button onClick={handleViewTrips} >
     مشاهده و تایید
   </button>

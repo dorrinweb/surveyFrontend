@@ -101,6 +101,14 @@ const PreviewTripsPage = () => {
 
 
 <div className="actions">
+
+
+  <button 
+    onClick={() => setShowConfirmModal(true)}
+    disabled={loading || successMessage} // اضافه شدن شرط successMessage
+  >
+    {loading ? "در حال ارسال..." : successMessage ? successMessage : "تایید و نهایی کردن"}
+  </button>
   <button
     onClick={() => {
       const lastFilledIndex = trips
@@ -127,13 +135,6 @@ const PreviewTripsPage = () => {
     disabled={loading || successMessage} // اضافه شدن شرط successMessage
   >
     صفحه ی قبلی
-  </button>
-
-  <button
-    onClick={() => setShowConfirmModal(true)}
-    disabled={loading || successMessage} // اضافه شدن شرط successMessage
-  >
-    {loading ? "در حال ارسال..." : successMessage ? successMessage : "تایید و نهایی کردن"}
   </button>
 </div>
 
