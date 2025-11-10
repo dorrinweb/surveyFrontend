@@ -14,14 +14,17 @@ const ReviewPage = ({ householdData, individuals, customRelation, handlePrevious
   const handleFinalSubmit = async () => {
     setIsSubmitting(true);
     setMessage("");
+  
+    // 🔄 اصلاح شده: جایگزینی "other" با مقدار وارد شده توسط کاربر
     const payload = {
       householdData,
       individuals: individuals.map((individual) => ({
         ...individual,
+        relationWithHouseHold: individual.relationWithHouseHold === "other" ? customRelation : individual.relationWithHouseHold,
         carDetails: individual.hasCarOwnership === "true" ? individual.carDetails : [],
       })),
     };
-
+  
     try {
       const responseData = await createHousehold(payload);
       console.log("اطلاعات با موفقیت ارسال شد:", responseData);
