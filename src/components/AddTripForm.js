@@ -415,8 +415,8 @@ if (trip.tripFee.trim() !== "" && parseFloat(trip.tripFee) < 0) {
    <FiMapPin className="location-icon" style={{ 
            pointerEvents: "none", // جلوگیری از تداخل با کلیک
            position: "absolute",
-           right: "10px",
-           top: "70%",
+           right: "5px",
+           top: "60%",
            transform: "translateY(-50%)"
          }} />
     {errors["departure.location"] && (
@@ -442,8 +442,8 @@ if (trip.tripFee.trim() !== "" && parseFloat(trip.tripFee) < 0) {
 <FiMapPin className="location-icon" style={{ 
         pointerEvents: "none", // جلوگیری از تداخل با کلیک
         position: "absolute",
-        right: "10px",
-        top: "70%",
+        right: "5px",
+        top: "60%",
         transform: "translateY(-50%)"
       }} />
   {errors["destination.location"] && (

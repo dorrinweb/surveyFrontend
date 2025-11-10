@@ -1,0 +1,516 @@
+/* استایل‌های پایه برای فرم */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 15px;
+    direction: rtl;
+  }
+  
+  .form-container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 3px solid #55adbe;
+    padding-bottom: 12px;
+  }
+  
+  .form-container h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  /* استایل‌های عمومی فیلدها */
+  .form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+  }
+  
+  .form-container input,
+  .form-container select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    background: white;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .form-container input:focus,
+  .form-container select:focus {
+    outline: none;
+    border-color: #55adbe;
+    box-shadow: 0 0 0 3px rgba(85, 173, 190, 0.1);
+  }
+  
+  .form-container input[readonly] {
+    background-color: #f8f9fa;
+    cursor: pointer;
+  }
+  
+  /* فیلد لوکیشن */
+  .location-field {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+  
+  .location-field input {
+    padding-right: 45px; /* فضا برای آیکون */
+    cursor: pointer;
+  }
+  
+  .location-icon {
+    pointer-events: none;
+    position: absolute;
+    right: 150px;
+    top: 40%;
+    transform: translateY(-50%);
+    color: #56a5ca;
+    font-size: 40px;
+    z-index: 2;
+  }
+  
+  /* فیلدهای زمان - همیشه در یک خط در تمام دستگاه‌ها */
+  .time-fields {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  
+  .time-fields input {
+    flex: 1;
+    min-width: 0; /* اجازه می‌دهد فیلدها کوچک شوند */
+    text-align: center;
+    padding: 12px 8px;
+  }
+  
+  .time-fields span {
+    color: #6c757d;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin: 0 2px;
+  }
+  
+  .time-fields select {
+    flex: 2;
+    min-width: 0;
+    padding: 12px 8px;
+  }
+  
+  /* دکمه‌ها */
+  .form-container button {
+    background: linear-gradient(135deg, #77c9da, #4e92a3);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .form-container button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #529bad, #4a8a9a);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .form-container button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .form-container button:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* پیام‌های خطا */
+  .error {
+    color: #dc3545;
+    font-size: 12px;
+    margin: -10px 0 15px 0;
+    text-align: right;
+    font-weight: 500;
+  }
+  
+  /* استایل‌های مدال */
+  .modal-header {
+    border-bottom: 2px solid #e9ecef;
+    padding: 20px;
+  }
+  
+  .modal-title {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 18px;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    border-top: 2px solid #e9ecef;
+    padding: 20px;
+  }
+  
+  /* استایل‌های مدال تأیید */
+  .info-modal-content {
+    direction: rtl;
+    text-align: right;
+  }
+  
+  .info-modal-content h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  .info-summary {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-right: 4px solid #28a745;
+  }
+  
+  .info-summary p {
+    margin: 8px 0;
+    color: #495057;
+    font-size: 14px;
+  }
+  
+  .info-reminder {
+    background: #e3f2fd;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-right: 4px solid #2196f3;
+  }
+  
+  .info-reminder p {
+    margin: 0;
+    color: #1565c0;
+    line-height: 1.5;
+    font-size: 13px;
+  }
+  
+  /* دکمه‌های مدال */
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+  }
+  
+  .btn-secondary {
+    background: #6c757d;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background: #5a6268;
+  }
+  
+  .btn-primary {
+    background: #28a745;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #218838;
+  }
+  
+  /* ریسپانسیو برای تبلت */
+  @media (max-width: 768px) {
+    .form-container {
+      padding: 0 12px;
+      margin: 15px auto;
+    }
+    
+    .form-container h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    
+    .form-container h3 {
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+    
+    .form-container input,
+    .form-container select {
+      padding: 10px;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    
+    .location-field input {
+      padding-right: 40px;
+    }
+    
+    .location-icon {
+      right: 12px;
+      font-size: 40px;
+    }
+    
+    .form-container button {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+    
+    .time-fields {
+      gap: 6px;
+    }
+    
+    .time-fields input,
+    .time-fields select {
+      padding: 10px 6px;
+      font-size: 13px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+      padding: 15px;
+    }
+    
+    .modal-title {
+      font-size: 16px;
+    }
+    
+    .info-summary,
+    .info-reminder {
+      padding: 12px;
+    }
+    
+    .btn {
+      min-width: 120px;
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+  }
+  
+  /* ریسپانسیو برای موبایل */
+  @media (max-width: 480px) {
+    .form-container {
+      padding: 0 10px;
+      margin: 10px auto;
+    }
+    
+    .form-container h2 {
+      font-size: 20px;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+    }
+    
+    .form-container h3 {
+      font-size: 17px;
+      margin-bottom: 16px;
+    }
+    
+    .form-container label {
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    
+    .form-container input,
+    .form-container select {
+      padding: 8px 10px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      border-width: 1px;
+    }
+    
+    .location-field input {
+      padding-right: 35px;
+    }
+    
+    .location-icon {
+      right: 10px;
+      font-size: 40px;
+    }
+    
+    .form-container button {
+      padding: 10px 16px;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    
+    /* فیلدهای زمان - همچنان در یک خط */
+    .time-fields {
+      gap: 4px;
+    }
+    
+    .time-fields input,
+    .time-fields select {
+      padding: 8px 4px;
+      font-size: 12px;
+    }
+    
+    .time-fields span {
+      font-size: 14px;
+    }
+    
+    .error {
+      font-size: 11px;
+      margin: -8px 0 12px 0;
+    }
+    
+    /* مدال در موبایل */
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+      padding: 12px;
+    }
+    
+    .modal-title {
+      font-size: 15px;
+    }
+    
+    .info-modal-content h4 {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    
+    .info-summary,
+    .info-reminder {
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+    
+    .info-summary p,
+    .info-reminder p {
+      font-size: 12px;
+    }
+    
+    .modal-footer {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .btn {
+      width: 100%;
+      min-width: auto;
+      margin: 0;
+    }
+  }
+  
+  /* برای موبایل‌های خیلی کوچک */
+  @media (max-width: 360px) {
+    .form-container {
+      padding: 0 8px;
+    }
+    
+    .form-container h2 {
+      font-size: 18px;
+    }
+    
+    .form-container h3 {
+      font-size: 16px;
+    }
+    
+    .form-container input,
+    .form-container select {
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+    
+    .location-field input {
+      padding-right: 30px;
+    }
+    
+    .location-icon {
+      right: 8px;
+      font-size: 30px;
+    }
+    
+    .form-container button {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    
+    .time-fields {
+      gap: 3px;
+    }
+    
+    .time-fields input,
+    .time-fields select {
+      padding: 6px 3px;
+      font-size: 11px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+      padding: 10px;
+    }
+  }
+  
+  /* بهبود نمایش در حالت landscape موبایل */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .form-container {
+      margin: 5px auto;
+    }
+    
+    .form-container input,
+    .form-container select {
+      padding: 6px 10px;
+      margin-bottom: 8px;
+    }
+    
+    .location-field input {
+      padding-right: 35px;
+    }
+    
+    .form-container button {
+      padding: 8px 16px;
+      margin-bottom: 6px;
+    }
+    
+    .time-fields input,
+    .time-fields select {
+      padding: 4px 6px;
+    }
+  }
+  
+  /* استایل برای نقشه در موبایل */
+  @media (max-width: 768px) {
+    .modal-lg {
+      margin: 10px;
+    }
+    
+    .modal-body .leaflet-container {
+      height: 50vh !important;
+    }
+  }
+  
+  /* استایل برای حالت focus در موبایل */
+  @media (max-width: 480px) {
+    .form-container input:focus,
+    .form-container select:focus {
+      border-width: 2px;
+    }
+  }

@@ -3,6 +3,8 @@ import { Modal } from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../styles/global.css";
+import "../styles/HouseholdForm.css";
+
 import { FiMapPin } from "react-icons/fi";
 import ReviewPage from "./ReviewPage";
 
@@ -286,8 +288,8 @@ const HouseholdForm = () => {
             <FiMapPin className="location-icon" style={{ 
               pointerEvents: "none",
               position: "absolute",
-              right: "10px",
-              top: "50%",
+              right: "4px",
+              top: "36%",
               transform: "translateY(-50%)"
             }} />
           </div>
@@ -610,7 +612,7 @@ const HouseholdForm = () => {
 
       {/* مدال راهنما بعد از مرحله 1 */}
       <Modal show={showInfoModal} onHide={() => setShowInfoModal(false)} centered>
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title>📋 تأیید اطلاعات خانوار</Modal.Title>
         </Modal.Header>
         <Modal.Body>
