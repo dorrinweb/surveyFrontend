@@ -15,6 +15,7 @@ const TripsPage = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
   const [userStatus, setUserStatus] = useState(null);
+  const [showInfoModal, setShowInfoModal] = useState(true); // مدال راهنما
   console.log(setUserStatus)
   const navigate = useNavigate();
   
@@ -319,6 +320,28 @@ const TripsPage = () => {
                 disabled={actionLoading}
               >
                 {actionLoading ? "⏳ در حال ثبت..." : "تأیید"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* مدال راهنما */}
+      {showInfoModal && (
+        <div className="info-modal">
+          <div className="modal-content">
+            <div className="modal-icon">ℹ️</div>
+            <h3>راهنمای ثبت سفر</h3>
+            <div className="info-content">
+              <p><strong>شهروند گرامی</strong></p>
+              <p>منظور از سفر در این فرم هرگونه نقل و انتقال درون شهری و برون شهری با هر وسیله نقلیه و حتی رفت و آمد پیاده بالای ۱۰۰ متر و بیش از ۵ دقیقه می‌باشد.</p>
+            </div>
+            <div className="modal-actions">
+              <button 
+                onClick={() => setShowInfoModal(false)} 
+                className="modal-btn modal-confirm"
+              >
+                ✅ متوجه شدم
               </button>
             </div>
           </div>
