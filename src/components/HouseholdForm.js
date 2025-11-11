@@ -603,7 +603,6 @@ const HouseholdForm = () => {
           )}
           <div style={{ marginTop: "20px" }}></div>
 
-          <button onClick={handlePreviousStep}>مرحله قبل</button>
           {isStep2Valid() && (
             <button onClick={() => {
               if (currentMemberIndex + 1 === individuals.length) {
@@ -617,6 +616,8 @@ const HouseholdForm = () => {
                 : `ادامه: اطلاعات عضو ${currentMemberIndex + 2}`}
             </button>
           )}
+                    <button onClick={handlePreviousStep}>مرحله قبل</button>
+
         </div>
       )}
 

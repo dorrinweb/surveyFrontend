@@ -83,19 +83,24 @@ const PreviewTripsPage = () => {
         {filledTrips.map((trip, index) => (
   <div key={index} className="trip-item">
     <p><strong>سفر شماره {trip.tripNumber}</strong></p>
-    <p>مبدا: {trip.departure.location}</p>
-    <p>زمان حرکت: {trip.departure.time.hour}:{trip.departure.time.minute} {trip.departure.time.period}</p>
-    <p>مقصد: {trip.destination.location}</p>
-    <p>زمان رسیدن: {trip.destination.time.hour}:{trip.destination.time.minute} {trip.destination.time.period}</p>
-    <p>هدف سفر: {trip.purpose}</p>
-    <p>نوع حمل و نقل: {trip.transportationMode}</p>
-    {trip.transportationMode === "خودروی شخصی راننده (من)" && (
-      <>
-        <p>پارکینگ: {trip.parking}</p>
-        {trip.parking !== "پارکینگ شخصی" && <p>هزینه پارکینگ: {trip.parkingFee}</p>}
-      </>
+    <p><strong>مبدا:</strong> {trip.departure.location}</p>
+    <p><strong>زمان حرکت:</strong> {trip.departure.time.hour}:{trip.departure.time.minute} {trip.departure.time.period}</p>
+    <p><strong>مقصد:</strong> {trip.destination.location}</p>
+    <p><strong>زمان رسیدن:</strong> {trip.destination.time.hour}:{trip.destination.time.minute} {trip.destination.time.period}</p>
+    <p><strong>هدف سفر:</strong> {trip.purpose}</p>
+    <p><strong>نوع حمل و نقل:</strong> {trip.transportationMode}</p>
+    
+    {/* 🔽 این بخش اصلاح شده */}
+    {trip.transportationMode === "خودروی شخصی (راننده بودم)" && trip.parking && (
+      <div className="parking-details">
+        <p><strong>پارکینگ:</strong> {trip.parking}</p>
+        {trip.parking !== "پارکینگ شخصی" && trip.parkingFee && (
+          <p><strong>هزینه پارکینگ:</strong> {trip.parkingFee} هزار تومان</p>
+        )}
+      </div>
     )}
-    <p>هزینه سفر: {trip.tripFee}</p>
+    
+    <p><strong>هزینه سفر:</strong> {trip.tripFee} هزار تومان</p>
   </div>
 ))}
 
